@@ -555,7 +555,7 @@ class PermutationGroup(Basic):
         # validate pos parameter
         base_len = len(base)
         if not isinstance(pos, int):
-            raise TypeError("pos must be an integer, got %s" % type(pos))
+            raise TypeError("pos must be an integer, got %s" % type(pos).__name__)
         if pos < 0 or pos >= base_len - 1:
             raise ValueError("pos must be in the range [0, %d), got %d" % (base_len - 1, pos))
         

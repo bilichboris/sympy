@@ -9,7 +9,7 @@ from sympy.combinatorics.permutations import Permutation
 from sympy.combinatorics.polyhedron import tetrahedron as Tetra, cube
 from sympy.combinatorics.testutil import _verify_bsgs, _verify_centralizer,\
     _verify_normal_closure
-from sympy.testing.pytest import skip, XFAIL, slow
+from sympy.testing.pytest import skip, XFAIL, slow, raises
 
 rmul = Permutation.rmul
 
@@ -607,7 +607,6 @@ def test_baseswap():
     
     # Test input validation for pos parameter
     # pos must be in range [0, len(base) - 1)
-    from sympy.testing.pytest import raises
     raises(ValueError, lambda: S.baseswap(base, strong_gens, len(base) - 1))
     raises(ValueError, lambda: S.baseswap(base, strong_gens, len(base)))
     raises(ValueError, lambda: S.baseswap(base, strong_gens, -1))
