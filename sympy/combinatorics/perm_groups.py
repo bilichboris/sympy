@@ -552,12 +552,18 @@ class PermutationGroup(Basic):
         discussion of the algorithm.
 
         """
+        # validate pos parameter
+        base_len = len(base)
+        if not isinstance(pos, int):
+            raise TypeError("pos must be an integer, got %s" % type(pos))
+        if pos < 0 or pos >= base_len - 1:
+            raise ValueError("pos must be in the range [0, %d), got %d" % (base_len - 1, pos))
+        
         # construct the basic orbits, generators for the stabilizer chain
         # and transversal elements from whatever was provided
         transversals, basic_orbits, strong_gens_distr = \
             _handle_precomputed_bsgs(base, strong_gens, transversals,
                                  basic_orbits, strong_gens_distr)
-        base_len = len(base)
         degree = self.degree
         # size of orbit of base[pos] under the stabilizer we seek to insert
         # in the stabilizer chain at position pos + 1

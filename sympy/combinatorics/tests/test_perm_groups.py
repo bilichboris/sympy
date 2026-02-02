@@ -604,6 +604,15 @@ def test_baseswap():
     assert _verify_bsgs(S, deterministic[0], deterministic[1]) is True
     assert randomized[0] == [0, 2, 1]
     assert _verify_bsgs(S, randomized[0], randomized[1]) is True
+    
+    # Test input validation for pos parameter
+    # pos must be in range [0, len(base) - 1)
+    from sympy.testing.pytest import raises
+    raises(ValueError, lambda: S.baseswap(base, strong_gens, len(base) - 1))
+    raises(ValueError, lambda: S.baseswap(base, strong_gens, len(base)))
+    raises(ValueError, lambda: S.baseswap(base, strong_gens, -1))
+    raises(TypeError, lambda: S.baseswap(base, strong_gens, 1.5))
+    raises(TypeError, lambda: S.baseswap(base, strong_gens, "1"))
 
 
 def test_schreier_sims_incremental():
